@@ -14,7 +14,9 @@ display(cover_object);
 
   for ii = 1:Mm
       for jj = 1:Nm
-          watermark(ii,jj)=bitget(message(ii,jj),8);
+          watermark1(ii,jj)=bitget(message(ii,jj),8);
+          watermark2(ii,jj)=bitget(message(ii,jj),7);
+          watermark3(ii,jj)=bitget(message(ii,jj),6);
       end
   end
 
@@ -22,13 +24,15 @@ display(cover_object);
 watermarked_image=cover_object;
 for ii = 1:Mm
     for jj = 1:Nm
-        watermarked_image(ii,jj)=bitset(watermarked_image(ii,jj),1,watermark(ii,jj));
+        watermarked_image(ii,jj)=bitset(watermarked_image(ii,jj),1,watermark1(ii,jj));
+        watermarked_image(ii,jj)=bitset(watermarked_image(ii,jj),2,watermark2(ii,jj));
+        watermarked_image(ii,jj)=bitset(watermarked_image(ii,jj),3,watermark3(ii,jj));
     end
 end
 display('hello');
 display(watermarked_image);
 
-imwrite(watermarked_image,'watermarked1bit.bmp','bmp');
+imwrite(watermarked_image,'watermarked3bit.bmp','bmp');
 figure(1)
 imshow(watermarked_image,[])
-title('Watermarked1 Image')
+title('Watermarked3 Image')
